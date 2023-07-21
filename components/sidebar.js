@@ -7,7 +7,7 @@ import Menu from "./Menu";
 
 export default function Sidebar(){
     return (
-        <div className='hidden sm:flex flex-col p-2 xl:items-start fixed h-full'>
+        <div className='hidden sm:flex flex-col p-2 xl:items-start fixed h-full '>
             {/* Twitter logo */}
             <div className='hoverEffect p-0 hover:bg-blue-100 xl:px-1'>
                 <Image width="50" height="50" src="https://cdn.cms-twdigitalassets.com/content/dam/help-twitter/twitter_logo_blue.png.twimg.768.png"></Image>

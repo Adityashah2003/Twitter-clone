@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import Sidebar from '../components/sidebar'
 import Feed from '../components/Feed'
+import Widgets from '../components/Widgets'
 
 
-export default function Home() {
+export default function Home({newsRes}) {
   return (
     <div>
       <Head>
@@ -18,9 +19,21 @@ export default function Home() {
       {/* FEED */}
       <Feed/>
 
+      {/* widgets */}
+      <Widgets newsRes={newsRes.articles}/>
+      
+
       </main>
     </div>
     
   )
 
+}
+export async function getServerSideProps() {
+  const newsRes = await fetch(`https://saurav.tech/NewsAPI/top-headlines/category/business/us.json`).then((res) => res.json())
+  return{
+    props:{
+    newsRes,    
+    }
+  }
 }
