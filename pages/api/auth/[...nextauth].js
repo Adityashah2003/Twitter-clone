@@ -10,6 +10,17 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
+  pages:{
+    signIn: "/auth/signin",
+  },
+
+  callbacks:{
+    async session({session,token}){
+      session.user.username = session.user.name.split(" ").join("").toLocalLoweCase();
+      session.user.id=toker.sub
+      return session;
+    }
+  }
 }
 
 export default NextAuth(authOptions)
