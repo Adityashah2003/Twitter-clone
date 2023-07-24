@@ -30,7 +30,7 @@ export default function Home({newsRes,randUsers}) {
 
 }
 export async function getServerSideProps() {
-  const newsRes = await fetch(`https://saurav.tech/NewsAPI/top-headlines/category/business/us.json`).then((res) => res.json());
+  const newsRes = await fetch("https://saurav.tech/NewsAPI/top-headlines/category/business/us.json").then((res) => res.json());
   
   const randUsers= await fetch("https://randomuser.me/api/?results=30&inc=name,login,picture").then((res) => res.json());
   return{

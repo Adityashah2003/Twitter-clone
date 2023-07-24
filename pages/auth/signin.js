@@ -15,7 +15,7 @@ export default function signin({providers}) {
         </div>
     </div>
   )
-}
+}   
 
 export async function getServerSideProps(){
     const providers = await getProviders();
