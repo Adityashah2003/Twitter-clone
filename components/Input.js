@@ -17,6 +17,7 @@ export default function Input() {
     setLoading(true);
     const docRef = await addDoc(collection(db,"posts"),{
       id: session.user.uid,
+      name: session.user.name,
       text: input,
       userImg: session.user.image,
       timestamp: serverTimestamp(),
@@ -63,7 +64,7 @@ export default function Input() {
               <div className='relative'>
                 <XIcon 
                 onClick={()=>setSelectedFile(null)} 
-                className='h-7 text-black absolute cursor-pointer shadow-md shadow-white rounded-full'></XIcon>
+                className='h-7 text-white m-1 absolute cursor-pointer border shadow-md border-white rounded-full'></XIcon>
                 <img src={selectedFile} className={`${loading && "animate-pulse"}`}></img>
               </div>
             )}
