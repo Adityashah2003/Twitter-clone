@@ -7,11 +7,15 @@ import { db,storage } from '../firebase';
 import { signIn, useSession } from 'next-auth/react';
 import {HeartIcon as HeartIconFilled} from "@heroicons/react/solid"
 import { deleteObject, ref } from 'firebase/storage';
+import { useRecoilState } from 'recoil';
+import {modalState,postIdState} from "../atom/modalAtom"
 
 export default function Post({ post }) {
   const {data:session} = useSession();
   const [likes,setLikes] = useState([]);
   const [hasLiked,setHasLiked]=useState(false); 
+  const [open,setOpen] = useRecoilState(modalState);
+  const [postId,setPostId] = useRecoilState(postIdState);
 
   useEffect(()=>{
     const unsubscribe = onSnapshot(
@@ -76,7 +80,16 @@ useEffect(()=>{
         <img className='rounded-2xl mb-2' src={post.data().image} alt='pic'></img>
         {/* icons */}
         <div className='flex justify-between text-gray-500 p-2'>
-          <ChatIcon className='h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100' />
+          <ChatIcon onClick={()=>{
+            if(!session){
+              signIn();
+            }
+            else{
+              setPostId(post.id)
+              setOpen(!open)
+            }}
+            }
+            className='h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100' />
           {session?.user.uid === post?.data().id && (
           <TrashIcon onClick={deletePost} className='h-9 w-9 hoverEffect p-2 hover:text-red-500 hover:bg-red-100' />
           )}          
